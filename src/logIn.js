@@ -125,26 +125,28 @@ export default function ({ setTheAuthUser, setBalance, balance }) {
           signUp(auth, email, password, setTheAuthUser);
         }}
       >
-        <label>
-          <input
-            className="EandP"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(f) => setEmail(f.target.value)}
-            required
-          ></input>
-        </label>
-        <label>
-          <input
-            className="EandP"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(f) => setPassword(f.target.value)}
-            required
-          ></input>
-        </label>
+        <div className="Logy">
+          <label>
+            <input
+              className="EandP"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(f) => setEmail(f.target.value)}
+              required
+            ></input>
+          </label>
+          <label>
+            <input
+              className="EandP"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(f) => setPassword(f.target.value)}
+              required
+            ></input>
+          </label>
+        </div>
         <button className="submit" type="submit">
           SUBMIT
         </button>
