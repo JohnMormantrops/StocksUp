@@ -1,2 +1,3 @@
-# FinishedProduct
+# StonksUp
+
 Created with CodeSandbox
