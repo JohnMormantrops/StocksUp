@@ -10,9 +10,15 @@ class SearchResults extends Component {
 
   stockFilter(searchTerm) {
     return function (stockObject) {
-      let stockname = stockObject.stock.name;
+      let stockname = stockObject.stock.name.toLowerCase();
+      let stocksymbol = stockObject.stock.symbol.toLowerCase();
+      let stocksector = stockObject.stock.sector.toLowerCase();
 
-      return stockname.includes(searchTerm); // end of return statement
+      return (
+        stockname.includes(searchTerm.toLowerCase()) ||
+        stocksymbol.includes(searchTerm.toLowerCase()) ||
+        stocksector.includes(searchTerm.toLowerCase())
+      ); // end of return statement
     }; // end of return function
   } // end of addressFilterFunction
 

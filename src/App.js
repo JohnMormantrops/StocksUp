@@ -1,5 +1,5 @@
 import "./styles.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Homepage from "./homepage";
 import Portfolio from "./portfolio";
 import Stonks from "./stonks";
@@ -7,18 +7,6 @@ import Logout from "./logout";
 import LogIn from "./logIn";
 import User from "./user";
 import ShowBalance from "./showBalance";
-import app from "./firebase-config";
-import bull from "./images/pngfind.com-bulls-png-6600169.png";
-import {
-  collection,
-  query,
-  onSnapshot,
-  doc,
-  where,
-  updateDoc,
-  deleteDoc
-} from "firebase/firestore";
-import { db } from "./firebase-config";
 
 export default function App() {
   const [page, setPage] = useState("home");
