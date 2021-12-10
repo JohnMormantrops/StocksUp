@@ -20,7 +20,7 @@ const addNewBalance = async (user) => {
   });
 };
 
-const signUp = (auth, email, password, setTheAuthUser) => {
+const signUp = (auth, email, password, setTheAuthUser, setPage) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -32,6 +32,7 @@ const signUp = (auth, email, password, setTheAuthUser) => {
       console.log(user.uid);
       setTheAuthUser(user);
       addNewBalance(user);
+      setPage("home");
 
       // ...
     })
@@ -43,7 +44,7 @@ const signUp = (auth, email, password, setTheAuthUser) => {
     });
 };
 
-const signIn = (auth, email, password, setTheAuthUser) => {
+const signIn = (auth, email, password, setTheAuthUser, setPage) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -53,6 +54,7 @@ const signIn = (auth, email, password, setTheAuthUser) => {
       console.log(user);
       console.log(user);
       setTheAuthUser(user);
+      setPage("home");
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -65,7 +67,7 @@ const signIn = (auth, email, password, setTheAuthUser) => {
     });
 };
 
-export default function ({ setTheAuthUser, setBalance, balance }) {
+export default function ({ setTheAuthUser, setBalance, balance, setPage }) {
   const [email, setEmail] = useState("");
   const [email1, setEmail1] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +90,7 @@ export default function ({ setTheAuthUser, setBalance, balance }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          signIn(auth, email1, password1, setTheAuthUser);
+          signIn(auth, email1, password1, setTheAuthUser, setPage);
         }}
       >
         <div className="Logy">
@@ -122,7 +124,7 @@ export default function ({ setTheAuthUser, setBalance, balance }) {
       <form
         onSubmit={(f) => {
           f.preventDefault();
-          signUp(auth, email, password, setTheAuthUser);
+          signUp(auth, email, password, setTheAuthUser, setPage);
         }}
       >
         <div className="Logy">
