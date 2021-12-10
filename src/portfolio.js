@@ -35,7 +35,6 @@ export default function ({ currentUser, balance, balanceID }) {
     try {
       let id = selling[0].id;
       let s = selling[0].sell;
-
       let added = Number(newBalance + s);
       await updateDoc(doc(db, "Stockies", balanceID), {
         balance: added
@@ -83,17 +82,21 @@ export default function ({ currentUser, balance, balanceID }) {
       <div className="container">
         <div className="orders">
           <h2>BUYING:</h2>
-          Total cost: <br />
           Buy from the Stonks page
         </div>
 
         <div className="orders">
           <h2>SELLING:</h2>
-          Total cost: <br />
+          Total cost: $
+          {selling.reduce((total, item) => {
+            return total + item.sell;
+          }, 0)}
           {console.log(selling)}
-          <button className="empbtn" onClick={removeFromPortfolio}>
-            REMOVE FROM PORTFOLIO
-          </button>
+          {selling.length !== 0 && (
+            <button className="empbtn" onClick={removeFromPortfolio}>
+              REMOVE FROM PORTFOLIO
+            </button>
+          )}
           <ol>
             {selling.map((s, key) => (
               <li key={key}>
