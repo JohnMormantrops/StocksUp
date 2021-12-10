@@ -8,17 +8,20 @@ import LogIn from "./logIn";
 import User from "./user";
 import ShowBalance from "./showBalance";
 
+//App is the parent for the pages of the app here we conditionally render the other pages in the app
+
 export default function App() {
+  // page state is used to conditionally render pages
   const [page, setPage] = useState("home");
   const [theAuthUser, setTheAuthUser] = useState(null);
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(0); //users are given a balance initially set at 0
   const [balanceID, setBalanceID] = useState("");
 
   if (theAuthUser)
     return (
       <div className="App">
         <div className="navbar">
-          {/* <img className="navButton" src={bull} /> */}
+          {/* if user logs in we will see the homescreen and navbar the buttons navigate to the pages */}
           <button className="navButton" onClick={() => setPage("home")}>
             HOME
           </button>
@@ -29,7 +32,6 @@ export default function App() {
             STONKS
           </button>
           <button className="navButton" onClick={() => setPage("User")}>
-            {/* {theAuthUser.email} */}
             USER
             <br /> {}
           </button>
@@ -43,7 +45,6 @@ export default function App() {
             setBalanceID={setBalanceID}
           />
         </div>
-        {/* {console.log(page)} */}
         {page === "home" && (
           <Homepage currentUser={theAuthUser} setPage={setPage} />
         )}

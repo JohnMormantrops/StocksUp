@@ -4,12 +4,14 @@ class SearchResults extends Component {
     super(props);
 
     this.state = {
+      //global array contains api data
       globalArray: this.props.globalArray
     };
   }
 
   stockFilter(searchTerm) {
     return function (stockObject) {
+      //stock filter allows user to search name symbol or sector of stock case insensetive
       let stockname = stockObject.stock.name.toLowerCase();
       let stocksymbol = stockObject.stock.symbol.toLowerCase();
       let stocksector = stockObject.stock.sector.toLowerCase();
@@ -23,11 +25,13 @@ class SearchResults extends Component {
   } // end of addressFilterFunction
 
   render() {
+    //array and search term passed from stonks seacrh term retrieved from search form componenet
     const arrayPassedAsParameter = this.props.globalArray;
     const searchTermFromProps = this.props.searchTerm;
 
     return (
       <div className="SearchResults">
+        {/* api data is passed through filter before rendering from the stonks page */}
         {arrayPassedAsParameter
           .filter(this.stockFilter(searchTermFromProps))
           .map((s, key) => (

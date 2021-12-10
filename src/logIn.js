@@ -5,11 +5,12 @@ import {
 } from "firebase/auth";
 import React, { useState } from "react";
 import firebaseApp from "./firebase-config";
-import app from "./App";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
-import avatar from "./images/LogInAvatar.jpg";
 
+//this function fire upon the succesful signup of a new user
+//settting them an initial balance of $1000 and adding it to database using their email as
+// balance id
 const addNewBalance = async (user) => {
   //  e.preventDefault();
   console.log("setting balance for user");
@@ -20,54 +21,46 @@ const addNewBalance = async (user) => {
   });
 };
 
-const signUp = (auth, email, password, setTheAuthUser, setPage) => {
+//sign up takes the input from sign up form
+const signUp = (auth, email, password, setTheAuthUser) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
 
       const user = userCredential.user;
-      console.log("HELLO");
-      console.log(user);
-      console.log("ID?????");
-      console.log(user.uid);
+      //set the auth user passed down from app component allowing user to acces app
+      //sign up takes the input from sign up form
       setTheAuthUser(user);
       addNewBalance(user);
-      setPage("home");
 
       // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorMessage);
       // ..
     });
 };
 
+//sign in an already signed up user
 const signIn = (auth, email, password, setTheAuthUser, setPage) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
 
       const user = userCredential.user;
-      console.log("HERE SIGNED IN USER");
-      console.log(user);
-      console.log(user);
       setTheAuthUser(user);
       setPage("home");
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
-      console.log("Not valid");
-      console.log(errorMessage);
-      const user = null;
-      console.log(user);
       alert(errorMessage);
     });
 };
 
-export default function ({ setTheAuthUser, setBalance, balance, setPage }) {
+export default function ({ setTheAuthUser, setPage }) {
+  //used email 1 and email 2 to avoid both forms being simultaniuosly filled
+  //same with password, get auth from firebase app
   const [email, setEmail] = useState("");
   const [email1, setEmail1] = useState("");
   const [password, setPassword] = useState("");
@@ -79,13 +72,6 @@ export default function ({ setTheAuthUser, setBalance, balance, setPage }) {
       <h1>
         stocks<text style={{ color: "forestgreen" }}>U</text>p
       </h1>
-      {/* <img
-        className="background"
-        src={avatar}
-        alt="Login Avatar"
-        width="100%"
-        height="500px"
-      /> */}
       <h1>Log In</h1>
       <form
         onSubmit={(e) => {
@@ -124,7 +110,7 @@ export default function ({ setTheAuthUser, setBalance, balance, setPage }) {
       <form
         onSubmit={(f) => {
           f.preventDefault();
-          signUp(auth, email, password, setTheAuthUser, setPage);
+          signUp(auth, email, password, setTheAuthUser);
         }}
       >
         <div className="Logy">

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+//this file renders a search form the props are passed down from stonks.js
+// the values are passed back to parent and to search results to display result
+
 class SearchForm extends Component {
   render() {
     const searchTermFromProps = this.props.searchTerm;

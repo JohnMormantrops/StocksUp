@@ -23,5 +23,6 @@ try {
   firebaseApp = initializeApp(firebaseConfig);
 }
 
+//export database and firebase app to use in app
 const db = getFirestore(firebaseApp, {});
 export { db, firebaseApp };
