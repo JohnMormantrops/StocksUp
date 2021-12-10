@@ -72,5 +72,5 @@ export default function App() {
         )}
       </div>
     );
-  else return <LogIn setTheAuthUser={setTheAuthUser} />;
+  else return <LogIn setTheAuthUser={setTheAuthUser} setPage={setPage} />;
 }
