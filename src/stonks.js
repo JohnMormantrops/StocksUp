@@ -140,66 +140,124 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>Stocks and Shares</h1>
-        {/* TASK 2: Make a new Seach Component */}
-        <div className="container">
-          <div className="orders">
-            <h2>BUYING:</h2>
-            Total cost:{" "}
-            {this.state.buying.reduce((total, item) => {
-              return total + item.rates.buy;
-            }, 0)}
-            <br />
-            {this.state.buying.length !== 0 && (
-              <button className="empbtn" onClick={this.addPortfolio}>
-                ADD TO PORTFOLIO
-              </button>
-            )}
-            {/* TASK 3：Add a button to REMOVE the Portfolio */}
-            <ol>
-              {this.state.buying.map((s, key) => (
-                <li key={key}>
-                  {s.stock.symbol} {s.stock.name} ${s.rates.buy}
-                </li>
-              ))}
-            </ol>
-          </div>
-          <pre> </pre>
-          <div className="orders">
-            <h2>SELLING:</h2>
-            Total cost:{" "}
-            {this.state.selling.reduce((total, item) => {
-              return total + item.rates.sell;
-            }, 0)}
-            <br />
-            Sell from your portfolio
-            <ol>
-              {this.state.selling.map((s, key) => (
-                <li key={key}>
-                  {s.stock.symbol} {s.stock.name} ${s.rates.sell}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-        <hr />
-        <SearchForm
-          searchTerm={this.state.searchTerm}
-          onChange={this.onSearchFormChange}
-        />
-        <hr />
-        <SearchResults
-          sellStock={this.sellStock}
-          buyStock={this.buyStock}
-          searchTerm={this.state.searchTerm}
-          globalArray={this.state.apiData}
-        />
-        <hr />
-      </div>
-    ); // end of return statement
-  } // end of render function
-} // end of class
+    if (this.state.errorMsg) {
+      return (
+        <div className="error">
+          <h1>We're very sorry: An error has occured in the API call</h1>
 
+          <p>The error message is: {this.state.errorMsg.toString()}</p>
+        </div>
+      ); // end of return.
+    } else if (this.state.isFetched === false) {
+      return (
+        <div className="fetching">
+          <h1>Stocks and Shares</h1>
+          <div className="container">
+            <div className="orders">
+              <h2>BUYING:</h2>
+              Total cost:{" "}
+              {this.state.buying.reduce((total, item) => {
+                return total + item.rates.buy;
+              }, 0)}
+              <br />
+              {this.state.buying.length !== 0 && (
+                <button className="empbtn" onClick={this.addPortfolio}>
+                  ADD TO PORTFOLIO
+                </button>
+              )}
+              {/* TASK 3：Add a button to REMOVE the Portfolio */}
+              <ol>
+                {this.state.buying.map((s, key) => (
+                  <li key={key}>
+                    {s.stock.symbol} {s.stock.name} ${s.rates.buy}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <pre> </pre>
+            <div className="orders">
+              <h2>SELLING:</h2>
+              Total cost:{" "}
+              {this.state.selling.reduce((total, item) => {
+                return total + item.rates.sell;
+              }, 0)}
+              <br />
+              Sell from your portfolio
+              <ol>
+                {this.state.selling.map((s, key) => (
+                  <li key={key}>
+                    {s.stock.symbol} {s.stock.name} ${s.rates.sell}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <hr />
+          </div>
+          <h1>We are loading your API request........</h1>
+          <p>Your data will be here very soon....</p>
+        </div>
+      ); // end of return
+    } else {
+      return (
+        <div>
+          <h1>Stocks and Shares</h1>
+          {/* TASK 2: Make a new Seach Component */}
+          <div className="container">
+            <div className="orders">
+              <h2>BUYING:</h2>
+              Total cost:{" "}
+              {this.state.buying.reduce((total, item) => {
+                return total + item.rates.buy;
+              }, 0)}
+              <br />
+              {this.state.buying.length !== 0 && (
+                <button className="empbtn" onClick={this.addPortfolio}>
+                  ADD TO PORTFOLIO
+                </button>
+              )}
+              {/* TASK 3：Add a button to REMOVE the Portfolio */}
+              <ol>
+                {this.state.buying.map((s, key) => (
+                  <li key={key}>
+                    {s.stock.symbol} {s.stock.name} ${s.rates.buy}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <pre> </pre>
+            <div className="orders">
+              <h2>SELLING:</h2>
+              Total cost:{" "}
+              {this.state.selling.reduce((total, item) => {
+                return total + item.rates.sell;
+              }, 0)}
+              <br />
+              Sell from your portfolio
+              <ol>
+                {this.state.selling.map((s, key) => (
+                  <li key={key}>
+                    {s.stock.symbol} {s.stock.name} ${s.rates.sell}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+          <hr />
+          <SearchForm
+            searchTerm={this.state.searchTerm}
+            onChange={this.onSearchFormChange}
+          />
+          <hr />
+          <SearchResults
+            sellStock={this.sellStock}
+            buyStock={this.buyStock}
+            searchTerm={this.state.searchTerm}
+            globalArray={this.state.apiData}
+          />
+          <hr />
+        </div>
+      ); // end of return statement
+    } // end of render function
+  } // end of class
+}
 export default App;
