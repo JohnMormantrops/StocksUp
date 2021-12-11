@@ -17,11 +17,13 @@ export default function App() {
   const [balance, setBalance] = useState(0); //users are given a balance initially set at 0
   const [balanceID, setBalanceID] = useState("");
 
+  //if authorised render navbar and homepage otherwise show login page
   if (theAuthUser)
     return (
       <div className="App">
         <div className="navbar">
-          {/* if user logs in we will see the homescreen and navbar the buttons navigate to the pages */}
+          {/* if user logs in we will see the homescreen and navbar the buttons navigate to the pages buttons
+          change state of page*/}
           <button className="navButton" onClick={() => setPage("home")}>
             HOME
           </button>
@@ -38,6 +40,7 @@ export default function App() {
           <button className="navButton" onClick={() => setPage("logout")}>
             LOGOUT
           </button>
+          {/* show balance component renders balance to screen */}
           <ShowBalance
             currentUser={theAuthUser}
             setBalance={setBalance}
@@ -46,16 +49,19 @@ export default function App() {
           />
         </div>
         {page === "home" && (
+          //   homepage component shows additional buttons and info
           <Homepage currentUser={theAuthUser} setPage={setPage} />
         )}
         {page === "portfolio" && (
           <Portfolio
+            //   portfolio component show users stcoks from db
             currentUser={theAuthUser}
             balance={balance}
             balanceID={balanceID}
           />
         )}
         {page === "stonks" && (
+          // stocks component shows stock
           <Stonks
             currentUser={theAuthUser}
             balance={balance}
@@ -65,6 +71,7 @@ export default function App() {
         {page === "logout" && <Logout setTheAuthUser={setTheAuthUser} />}
         {page === "User" && (
           <User
+            //user component upodat balance
             currentUser={theAuthUser}
             balanceID={balanceID}
             balance={balance}
