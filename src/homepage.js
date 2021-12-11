@@ -1,6 +1,3 @@
-import background from "./images/stocksgoup.png";
-import money from "./images/money-money-money-make-it-rain.gif";
-
 //hompeage shows the app logo and some information paragraphs for the pages, the
 // the paragraphs are iteractive and clickable,
 export default function ({ setPage }) {

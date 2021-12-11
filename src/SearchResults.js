@@ -49,6 +49,7 @@ class SearchResults extends Component {
                   <p style={{ margin: "3px" }}>${s.rates.buy.toFixed(2)}</p>
                   <button
                     className="buybtn"
+                    // buy button send the stock object to the button handler function
                     onClick={() => this.props.buyStock(key)}
                   >
                     BUY
@@ -59,7 +60,7 @@ class SearchResults extends Component {
                   <button
                     style={{ background: "none", color: "white" }}
                     className="sellbtn"
-                    onClick={() => this.props.sellStock(key)}
+                    //This button does nothing from this page but is active from the portfolio page
                   >
                     SELL
                   </button>

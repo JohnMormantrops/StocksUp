@@ -8,13 +8,9 @@ import firebaseApp from "./firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
 
-//this function fire upon the succesful signup of a new user
-//settting them an initial balance of $1000 and adding it to database using their email as
-// balance id
+//this function fires upon the succesful signup of a new user
+//settting them an initial balance of $1000 and adding it to database
 const addNewBalance = async (user) => {
-  //  e.preventDefault();
-  console.log("setting balance for user");
-  console.log(user);
   await addDoc(collection(db, "Stockies"), {
     balance: 1000,
     userID: user.email
@@ -28,8 +24,8 @@ const signUp = (auth, email, password, setTheAuthUser) => {
       // Signed in
 
       const user = userCredential.user;
-      //set the auth user passed down from app component allowing user to acces app
-      //sign up takes the input from sign up form
+      //setTheAuthUser passed down from app component allowing user to acces app
+      //sign up function takes the input from sign up form
       setTheAuthUser(user);
       addNewBalance(user);
 
@@ -42,7 +38,8 @@ const signUp = (auth, email, password, setTheAuthUser) => {
     });
 };
 
-//sign in an already signed up user
+//sign in an already signed up user takes input from signupo form
+// and signs user in through firebase
 const signIn = (auth, email, password, setTheAuthUser, setPage) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -59,6 +56,8 @@ const signIn = (auth, email, password, setTheAuthUser, setPage) => {
 };
 
 export default function ({ setTheAuthUser, setPage }) {
+  //setTheAuthUser passed down from app component allowing user to acces app
+  //setPage passed here to set page to home page each time user logs in
   //used email 1 and email 2 to avoid both forms being simultaniuosly filled
   //same with password, get auth from firebase app
   const [email, setEmail] = useState("");

@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { db } from "./firebase-config";
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 
-const User = ({ currentUser, balanceID, balance, setBalance }) => {
+//user can update their balance using this component
+//balanceID and balance passed from parent component App.js
+const User = ({ balanceID, balance }) => {
   const [newBalance, setNewBalance] = useState(0);
 
-  console.log("HERS tHER ID");
-  console.log(balanceID);
-
+  //handle submit takes the newbalance from user input in form
+  // and updates the value in the db
   const handleSubmit = async (balanceID, newBalance) => {
-    // const userDoc = doc(db, "Stockies", balanceID);
-    // const newFields = { balance :  newBalance };
-    // await updateDoc();
     await updateDoc(doc(db, "Stockies", balanceID), {
       balance: newBalance
     });
@@ -32,6 +30,7 @@ const User = ({ currentUser, balanceID, balance, setBalance }) => {
             type="number"
             className="Addtobalance"
             placeholder="Add funds"
+            //number input is added to user balance and set to the variable newbalance
             onChange={(e) => setNewBalance(balance + Number(e.target.value))}
           />
         </div>
