@@ -80,5 +80,6 @@ export default function App() {
         )}
       </div>
     );
+  // login page user firebase auth for user each login also sets page state to home
   else return <LogIn setTheAuthUser={setTheAuthUser} setPage={setPage} />;
 }
