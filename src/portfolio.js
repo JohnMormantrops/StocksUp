@@ -18,7 +18,7 @@ export default function ({ currentUser, balance, balanceID }) {
   //selling is  used to temprorarily add a stock to before selling
   const [selling, setSelling] = useState([]);
   //new balanec is used to temporarily store user balance before updating when selling stock
-  const [newBalance] = useState(balance);
+  const [newBalance, setNewBalance] = useState(balance);
 
   useEffect(() => {
     //query database to retrieve users stock data
@@ -48,6 +48,7 @@ export default function ({ currentUser, balance, balanceID }) {
       //variable added uses newbalance and adds the value
       //of the stock were selling
       let added = Number(newBalance + s);
+      setNewBalance(added);
       //update the db to set the balance to added balance
       await updateDoc(doc(db, "Stockies", balanceID), {
         balance: added

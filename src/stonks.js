@@ -75,8 +75,12 @@ class App extends Component {
     //the item can then be seen in the portfolio
 
     let s = this.state.buying[0];
+    // console.log(s)
+    // console.log(this.state.newBalance)
+    // console.log(s.rates.buy)
     let minused = Number(this.state.newBalance - s.rates.buy);
-
+    this.setState({ Balance: minused });
+    this.setState({ newBalance: minused });
     //update balance to be old balance - price of stock
     await updateDoc(doc(db, "Stockies", this.props.balanceID), {
       balance: minused
