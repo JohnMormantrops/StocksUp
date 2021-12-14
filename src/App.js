@@ -31,7 +31,7 @@ export default function App() {
             PORTFOLIO
           </button>
           <button className="navButton" onClick={() => setPage("stonks")}>
-            STONKS
+            STOCKS
           </button>
           <button className="navButton" onClick={() => setPage("User")}>
             USER

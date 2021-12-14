@@ -17,7 +17,7 @@ export default function ({ setPage }) {
           keep track of your stocks
         </p>
         <p onClick={() => setPage("stonks")} className="par">
-          <b>stonks</b>
+          <b>stocks</b>
           <br />
           buy stocks to add to your portfolio
         </p>
